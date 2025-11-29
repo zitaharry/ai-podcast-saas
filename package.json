@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev & convex dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.35.5",
+    "convex": "^1.29.3",
     "next": "16.0.5",
     "prettier": "^3.7.2",
     "react": "19.2.0",
