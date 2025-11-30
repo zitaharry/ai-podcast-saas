@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ReactNode } from "react";
-import { ConvexClientProvider } from "@/app/convex-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { ConvexClientProvider } from "./convex-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: ReactNode;
+  children: React.ReactNode;
 }>) {
   return (
     <ClerkProvider>
@@ -34,7 +34,7 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
             {children}
-            {/*<Toaster />*/}
+            <Toaster />
           </body>
         </html>
       </ConvexClientProvider>
