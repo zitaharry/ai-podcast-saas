@@ -24,6 +24,7 @@
  */
 import { serve } from "inngest/next";
 import { inngest } from "@/inngest/client";
+import { helloWorld } from "@/inngest/functions/hello";
 // import { podcastProcessor } from "../../../inngest/functions/podcast-processor";
 // import { retryJobFunction } from "../../../inngest/functions/retry-job";
 
@@ -45,5 +46,5 @@ export const dynamic = "force-dynamic";
  */
 export const { GET, POST, PUT } = serve({
   client: inngest, // Inngest client instance
-  functions: [], // Array of all Inngest functions to serve
+  functions: [helloWorld], // Array of all Inngest functions to serve
 });
