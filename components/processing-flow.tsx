@@ -151,6 +151,75 @@ const ProcessingFlow = ({
     unlockedOutputs.length,
   ]);
 
-  return <div>ProcessingFlow</div>;
+  return (
+    <div className="space-y-6">
+      <PhaseCard
+        icon={FileText}
+        title="Phase 1: AI Analysis"
+        description={getTranscriptionDescription()}
+        status={transcriptionStatus}
+        isActive={isTranscribing}
+        progress={isTranscribing ? transcriptionProgress : undefined}
+        timeEstimate={transcriptionInProgress ? timeRangeText : undefined}
+      />
+
+      <div className="flex items-center justify-center">
+        <div className="flex items-center gap-2 text-muted-foreground">
+          <div className="h-px w-16 bg-border" />
+          <ChevronDown className="h-5 w-5" />
+          <div className="h-px w-16 bg-border" />
+        </div>
+      </div>
+
+      <PhaseCard
+        icon={Sparkles}
+        title="Phase 2: AI Generation"
+        description={getGenerationDescription()}
+        status={generationStatus}
+        isActive={isGenerating}
+      >
+        {isGenerating && (
+          <div className="space-y-3 pt-2">
+            {unlockedOutputs.map((output, idx) => {
+              const isActive = idx === currentOutputIndex;
+
+              return (
+                <GenerationOutputItem
+                  key={output.name}
+                  name={output.name}
+                  description={output.description}
+                  icon={output.icon}
+                  isActive={isActive}
+                />
+              );
+            })}
+
+            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-6 text-center mt-6 border-2 border-emerald-200 shadow-lg">
+              <p className="text-sm text-gray-700 leading-relaxed">
+                <span className="font-bold text-emerald-600 text-base">
+                  Powered by Inngest
+                </span>{" "}
+                — AI is generating {unlockedOutputs.length} output
+                {unlockedOutputs.length > 1 ? "s" : ""} simultaneously
+              </p>
+            </div>
+          </div>
+        )}
+
+        {generationComplete && (
+          <div className="flex flex-wrap items-center gap-3 pt-4">
+            {unlockedOutputs.map((output) => (
+              <Badge
+                key={output.name}
+                className="text-sm px-4 py-2 gradient-emerald text-white shadow-md"
+              >
+                {output.name}
+              </Badge>
+            ))}
+          </div>
+        )}
+      </PhaseCard>
+    </div>
+  );
 };
 export default ProcessingFlow;
